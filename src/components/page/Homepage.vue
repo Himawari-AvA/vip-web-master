@@ -56,7 +56,7 @@ import { insertMovie } from '../../api/index';
 import { requestDealData } from '../../api/index';
 
 export default {
-    name: 'dashboard',
+    name: 'homepage',
     data() {
         return {
             query: {
