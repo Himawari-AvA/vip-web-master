@@ -2,8 +2,8 @@
  * @Author: Himawari 867415074@qq.com
  * @Date: 2022-06-24 19:57:11
  * @LastEditors: Himawari 867415074@qq.com
- * @LastEditTime: 2022-06-24 20:25:50
- * @FilePath: \cinema-web-master\src\router\index.js
+ * @LastEditTime: 2022-06-25 01:33:59
+ * @FilePath: \vip-web-master\src\router\index.js
  * @Description:
  *
  * Copyright (c) 2022 by Himawari 867415074@qq.com, All Rights Reserved.
@@ -24,7 +24,7 @@ export default new Router({
         //dashboard挡泥板，表示默认显示的界面，这里表当地址位/时跳转到挡泥板
         {
             path: '/',
-            redirect: '/dashboard'
+            redirect: '/homepage'
         },
         {
             // 2. 定义路由
@@ -43,8 +43,8 @@ export default new Router({
             meta: { title: '背景板' },
             children: [
                 {
-                    path: '/dashboard',
-                    component: () => import('../components/page/Dashboard.vue'),
+                    path: '/homepage',
+                    component: () => import('../components/page/Homepage.vue'),
                     meta: { title: '系统首页' }
                 },
                 {
