@@ -67,18 +67,40 @@ export default {
                 {
                     icon: 'el-icon-lx-people',
                     index: 'member',
-                    title: '会员管理'
-                    // subs: [
-                    //     {
-                    //         index: 'member',
-                    //         title: '会员列表'
-                    //     }
-                    // ]
+                    title: '会员管理',
+                    subs: [
+                        {
+                            index: 'member',
+                            title: '会员列表'
+                        },
+                        {
+                            // icon: 'el-icon-lx-calendar',
+                            index: 'care',
+                            title: '会员生日'
+                        }
+                    ]
                 },
+                {
+                    icon: 'el-icon-lx-copy',
+                    index: 'card',
+                    title: '会员卡管理',
+                    subs: [
+                        {
+                            index: 'card',
+                            title: '会员卡列表'
+                        },
+
+                        {
+                            index: 'record',
+                            title: '交易记录'
+                        }
+                    ]
+                },
+
                 {
                     icon: 'el-icon-pie-chart',
                     index: 'charts',
-                    title: '统计数据'
+                    title: '数据统计'
                 }
             ]
         };
@@ -107,12 +129,13 @@ export default {
     top: 70px;
     bottom: 0;
     overflow-y: scroll;
+    /* width: 1000px; */
 }
 .sidebar::-webkit-scrollbar {
     width: 0;
 }
 .sidebar-el-menu:not(.el-menu--collapse) {
-    width: 200px;
+    width: 250px;
 }
 .sidebar > ul {
     height: 100%;

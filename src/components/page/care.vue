@@ -17,19 +17,14 @@
         </div>
         <div class="container">
             <div class="handle-box">
-                <el-button type="primary" icon="el-icon-s-custom" class="handle-del mr10" @click="handleRegister">会员注册 </el-button>
-                <!-- 使用下拉选择菜单来选择搜索条件
+                <!--使用下拉选择菜单来选择搜索条件-->
                 <el-select v-model="query.birthdayQuery" clearable placeholder="按生日查询" class="handle-select mr10">
                     <el-option key="0" label="当天过生日" value="1"></el-option>
                     <el-option key="2" label="七天内过生日" value="7"></el-option>
                     <el-option key="3" label="十天内过生日" value="10"></el-option>
-                </el-select> -->
+                </el-select>
                 <el-input v-model="query.name" clearable placeholder="会员名称查询" class="handle-input mr10"></el-input>
-                <!-- <el-input v-model="query.name" clearable placeholder="会员名称查询" class="handle-input mr10"></el-input> -->
-                <!-- <a href="javascript:;" @click="handleSearch">查询</a> -->
-                <el-button type="primary" icon="el-icon-search" class="handle-del mr10 bt1" @click="handleSearch">查询 </el-button>
-
-                <el-button type="danger" icon="el-icon-delete" @click="delAllSelection()" style="float:right">删除所选会员 </el-button>
+                <el-button type="primary" icon="el-icon-search" @click="handleSearch">查询</el-button>
             </div>
             <!--绑定memberData变量-->
             <el-table
@@ -54,17 +49,7 @@
                 <el-table-column prop="name" width="150" label="会员姓名" align="center"></el-table-column>
                 <el-table-column prop="sex" label="性别" align="center"></el-table-column>
                 <el-table-column prop="birthday" label="生日" align="center"> </el-table-column>
-                <el-table-column label="操作" width="400" align="center">
-                    <template slot-scope="scope">
-                        <el-button type="primary" icon="el-icon-postcard" @click="handleMember(scope.$index, scope.row)"
-                            >查看信息
-                        </el-button>
-                        <el-button type="warning" icon="el-icon-edit" @click="handleEdit(scope.$index, scope.row)">修改 </el-button>
-                        <!--点击时传递当前行索引和数据给函数，并在函数中赋值给form等数据，
-                        并将编辑框显示-->
-                        <el-button type="danger" icon="el-icon-delete" @click="handleDelete(scope.$index, scope.row)">删除 </el-button>
-                    </template>
-                </el-table-column>
+                <el-table-column prop="instance" label="距离生日天数" align="center"> </el-table-column>
             </el-table>
             <!--底部的分页区域-->
             <div class="pagination">
@@ -78,100 +63,6 @@
                 ></el-pagination>
             </div>
         </div>
-
-        <!-- 编辑弹出框，拿到刚刚赋值到form的数据 -->
-        <el-dialog title="编辑" :visible.sync="editVisible" width="33%">
-            <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-                <el-form-item label="用户名" prop="name">
-                    <el-input v-model="form.name"></el-input>
-                </el-form-item>
-                <el-form-item label="密码" prop="password">
-                    <el-input v-model="form.password" show-password placeholder="请输入密码"></el-input>
-                </el-form-item>
-                <el-form-item label="性别" prop="sex">
-                    <el-radio v-model="form.sex" label="男">男</el-radio>
-                    <el-radio v-model="form.sex" label="女">女</el-radio>
-                </el-form-item>
-                <el-form-item label="真实姓名" prop="realName">
-                    <el-input v-model="form.realName" placeholder="请输入真实姓名"></el-input>
-                </el-form-item>
-                <el-form-item label="联系电话" prop="phoneNumber">
-                    <el-input v-model="form.phoneNumber" placeholder="请输入联系电话"></el-input>
-                </el-form-item>
-                <el-form-item label="邮箱" prop="emailAddress">
-                    <el-input v-model="form.emailAddress" placeholder="请输入邮箱"></el-input>
-                </el-form-item>
-                <el-form-item label="生日" prop="birthday">
-                    <el-date-picker
-                        v-model="form.birthday"
-                        type="date"
-                        placeholder="选择日期"
-                        format="yyyy-MM-dd"
-                        value-format="yyyy-MM-dd"
-                    >
-                    </el-date-picker>
-                </el-form-item>
-            </el-form>
-            <span slot="footer" class="dialog-footer">
-                <el-button @click="editVisible = false">取 消</el-button>
-                <el-button type="primary" @click="saveEdit">确 定</el-button>
-            </span>
-        </el-dialog>
-
-        <!-- 注册弹出框 -->
-        <el-dialog title="注册" :visible.sync="registerVisible" width="33%">
-            <el-form ref="form" :model="registerForm" :rules="rules" label-width="80px">
-                <el-form-item label="会员名" prop="name">
-                    <el-input v-model="registerForm.name"></el-input>
-                </el-form-item>
-                <el-form-item label="密码" prop="password">
-                    <el-input v-model="registerForm.password" show-password placeholder="请输入密码"></el-input>
-                </el-form-item>
-                <el-form-item label="性别" prop="sex">
-                    <el-radio v-model="registerForm.sex" label="男">男</el-radio>
-                    <el-radio v-model="registerForm.sex" label="女">女</el-radio>
-                </el-form-item>
-                <el-form-item label="真实姓名" prop="realName">
-                    <el-input v-model="registerForm.realName" placeholder="请输入真实姓名"></el-input>
-                </el-form-item>
-                <el-form-item label="联系电话" prop="phoneNumber">
-                    <el-input v-model="registerForm.phoneNumber" placeholder="请输入联系电话"></el-input>
-                </el-form-item>
-                <el-form-item label="邮箱" prop="emailAddress">
-                    <el-input v-model="registerForm.emailAddress" placeholder="请输入邮箱"></el-input>
-                </el-form-item>
-                <el-form-item label="生日" prop="birthday">
-                    <el-date-picker
-                        v-model="registerForm.birthday"
-                        value-format="yyyy-MM-dd"
-                        type="date"
-                        placeholder="选择日期"
-                        format="yyyy-MM-dd"
-                    >
-                    </el-date-picker>
-                </el-form-item>
-            </el-form>
-            <span slot="footer" class="dialog-footer">
-                <el-button @click="editVisible = false">取 消</el-button>
-                <el-button type="primary" @click="saveRegister">确 定</el-button>
-            </span>
-        </el-dialog>
-
-        <!-- 会员登录弹出框 -->
-        <el-dialog title="确认会员信息" :visible.sync="loginVisible" width="30%">
-            <el-form ref="form" :model="loginForm" :rules="rules" label-width="70px">
-                <el-form-item label="会员Id">
-                    <el-input v-model="loginForm.memberId" :disabled="true"></el-input>
-                </el-form-item>
-                <el-form-item label="会员姓名">
-                    <el-input v-model="loginForm.name" :disabled="true"></el-input>
-                </el-form-item>
-            </el-form>
-            <span slot="footer" class="dialog-footer">
-                <el-button @click="editVisible = false">取 消</el-button>
-                <el-button type="primary" @click="loginMember">确 定</el-button>
-            </span>
-        </el-dialog>
     </div>
 </template>
 
@@ -200,10 +91,7 @@ export default {
                 password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
                 name: [{ required: true, message: '请输入姓名', trigger: 'blur' }],
                 sex: [{ required: true, message: '请输入性别', trigger: 'blur' }],
-                birthday: [{ required: true, message: '请输入生日', trigger: 'blur' }],
-                realName: [{ required: true, message: '请输入真实姓名', trigger: 'blur' }],
-                phoneNumber: [{ required: true, message: '请输入联系电话', trigger: 'blur' }],
-                emailAddress: [{ required: true, message: '请输入邮箱地址', trigger: 'blur' }]
+                birthday: [{ required: true, message: '请输入生日', trigger: 'blur' }]
             },
             memberData: [],
             multipleSelection: [],
@@ -219,6 +107,7 @@ export default {
             id: -1
         };
     },
+
     created() {
         this.getMemberData();
     },
@@ -229,6 +118,14 @@ export default {
             memberData(this.query).then(res => {
                 this.memberData = res.data.list;
                 this.pageTotal = res.data.pageTotal || 50;
+                this.memberData.map(m => {
+                    // 转换日期格式bai
+                    var now = Date.parse(new Date());
+                    let birthday = Date.parse(new Date(m.birthday.replace(/-/g, '/'))); // "2010/08/01";
+                    m.instance = parseInt(((now - birthday) / (1000 * 60 * 60 * 24)) % 365); //核心：时间戳相减，然后除以天数
+                    m.instance = (-m.instance + 365) % 365; //核心：时间戳相减，然后除以天数
+                });
+                this.memberData.sort((a, b) => a.instance - b.instance);
             });
         },
         handleRegister() {
@@ -257,43 +154,49 @@ export default {
             this.loginVisible = true;
         },
         loginMember() {
-            let _this = this;
-            this.loginVisible = false;
-            //路由跳转到会员卡页面，这里需要将登录会员的账号信息传递过去
-            /*
-                * // 使用path来匹配路由，然后通过query来传递参数
+            loginMember(this.loginForm).then(res => {
+                let _this = this;
+                if (res.status == 200) {
+                    this.loginVisible = false;
+                    //路由跳转到会员卡页面，这里需要将登录会员的账号信息传递过去
+                    /*
+                        * // 使用path来匹配路由，然后通过query来传递参数
+                            this.$router.push({
+                                path: '/orderDetail',
+                                query: {
+                                id: 1
+                                }
+                            });
+                            // 对应路由配置如下：
+                               {
+                                     path: '/orderDetail',
+                                     name: 'orderDetail',
+                                     component: orderDetail
+                                }
+                            // 组件中获取参数的方式：
+                            this.$route.query.id
+                        * */
+                    //如果需要在跳转路由时传参，要使用query而不是params，因为前者是get方式请求，在地址栏中显示参数的，即使刷新也会不丢失数据
+                    //如果传递的数据是对象，需要将对象转换为字符串，在接收处转换回来
+
+                    /*
+                        提醒一下，当使用路由参数时，例如从 /user/foo 导航到 /user/bar，
+                        原来的组件实例会被复用。因为两个路由都渲染同个组件，比起销毁再创建，复用则显得更加高效。不过，这也意味着组件的生命周期钩子不会再被调用。
+                        复用组件时，想对路由参数的变化作出响应的话，你可以简单地 watch (监测变化) $route 对象
+                        或者不想复用的话，就在父组件的router-view上加个key
+                        <router-view :key="$route.fullPath"></router-view>
+                        */
                     this.$router.push({
-                        path: '/orderDetail',
+                        name: 'card',
                         query: {
-                        id: 1
+                            data: JSON.stringify(_this.loginForm)
                         }
                     });
-                    // 对应路由配置如下：
-                       {
-                             path: '/orderDetail',
-                             name: 'orderDetail',
-                             component: orderDetail
-                        }
-                    // 组件中获取参数的方式：
-                    this.$route.query.id
-                * */
-            //如果需要在跳转路由时传参，要使用query而不是params，因为前者是get方式请求，在地址栏中显示参数的，即使刷新也会不丢失数据
-            //如果传递的数据是对象，需要将对象转换为字符串，在接收处转换回来
-
-            /*
-                提醒一下，当使用路由参数时，例如从 /user/foo 导航到 /user/bar，
-                原来的组件实例会被复用。因为两个路由都渲染同个组件，比起销毁再创建，复用则显得更加高效。不过，这也意味着组件的生命周期钩子不会再被调用。
-                复用组件时，想对路由参数的变化作出响应的话，你可以简单地 watch (监测变化) $route 对象
-                或者不想复用的话，就在父组件的router-view上加个key
-                <router-view :key="$route.fullPath"></router-view>
-                */
-            this.$router.push({
-                name: 'card',
-                query: {
-                    data: JSON.stringify(_this.loginForm)
+                    this.loginForm = {};
+                } else {
+                    this.$message.error('账号或者密码错误，请重新输入');
                 }
             });
-            this.loginForm = {};
         },
         // 触发搜索按钮，将显示的页面设为第一页
         handleSearch() {
@@ -399,25 +302,10 @@ export default {
 
 .handle-select {
     width: 150px;
-    position: absolute;
-    top: 20.5%;
-    left: 21.5%;
-    transform: translate(-50%, -50%);
-    /*设置元素不被后面元素覆盖*/
-    z-index: 1;
 }
 
 .handle-input {
     width: 150px;
-    display: inline-block;
-    /* position: absolute; */
-    position: relative;
-    /* top: 20.5%; */
-    /* left: 18%; */
-    top: 17px;
-    left: 8%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
 }
 
 .table {
@@ -439,16 +327,24 @@ export default {
     width: 40px;
     height: 40px;
 }
-
-.bt1 {
+a {
     text-decoration: none; /*why set text-decoration as none?*/
-    position: relative;
-    top: 17px;
-    left: 5%;
+    position: absolute;
+    top: 20%;
+    left: 50%;
     transform: translate(-50%, -50%); /*translate the button self*/
+    font-size: 24px;
+    background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+    background-size: 400%;
+    width: 100px;
+    height: 50px;
+    line-height: 50px; /*this means the height the text self */
+    text-align: center;
+    color: #fff;
+    text-transform: capitalize;
+    border-radius: 5px; /*make the profile round*/
     z-index: 1;
 }
-
 a::before {
     content: '';
     position: absolute;
@@ -456,18 +352,16 @@ a::before {
     top: -5px;
     right: -5px;
     bottom: -5px;
-    /* background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4); */
+    background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
     background-size: 400%;
     border-radius: 50px;
     filter: blur(20px);
     z-index: -1;
 }
-
 a:hover::before,
 a:hover {
     animation: sun 8s infinite;
 }
-
 @keyframes sun {
     100% {
         background-position: -400% 0;

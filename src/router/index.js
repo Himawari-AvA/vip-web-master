@@ -1,13 +1,3 @@
-/*
- * @Author: Himawari 867415074@qq.com
- * @Date: 2022-06-24 19:57:11
- * @LastEditors: Himawari 867415074@qq.com
- * @LastEditTime: 2022-06-25 01:33:59
- * @FilePath: \vip-web-master\src\router\index.js
- * @Description:
- *
- * Copyright (c) 2022 by Himawari 867415074@qq.com, All Rights Reserved.
- */
 import Vue from 'vue';
 import Router from 'vue-router';
 // 0. 如果使用模块化机制编程，导入Vue和VueRouter，要调用 Vue.use(VueRouter)
@@ -24,7 +14,7 @@ export default new Router({
         //dashboard挡泥板，表示默认显示的界面，这里表当地址位/时跳转到挡泥板
         {
             path: '/',
-            redirect: '/homepage'
+            redirect: '/login'
         },
         {
             // 2. 定义路由
@@ -52,6 +42,12 @@ export default new Router({
                     component: () => import('../components/page/Member.vue'),
                     meta: { title: '会员列表' }
                 },
+
+                {
+                    path: '/care',
+                    component: () => import('../components/page/care.vue'),
+                    meta: { title: '会员关怀' }
+                },
                 {
                     // vue-schart组件
                     path: '/charts',
@@ -67,6 +63,17 @@ export default new Router({
                     path: '/403',
                     component: () => import('../components/page/403.vue'),
                     meta: { title: '403' }
+                },
+                {
+                    name: 'card',
+                    path: '/card',
+                    component: () => import('../components/page/card.vue'),
+                    meta: { title: '会员卡列表' }
+                },
+                {
+                    path: '/record',
+                    component: () => import('../components/page/record.vue'),
+                    meta: { title: '交易记录' }
                 }
             ]
         },

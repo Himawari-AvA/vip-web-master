@@ -57,7 +57,7 @@ export default {
                           想要导航到不同的 URL，则使用 router.push 方法。
                           这个方法会向 history 栈添加一个新的记录，所以，当用户点击浏览器后退按钮时，则回到之前的 URL。
                           当你点击 <router-link> 时，这个方法会在内部调用，所以说，点击 等同于调用 router.push(…)。*/
-                            this.$router.push('/');
+                            this.$router.push('/homepage');
                         } else {
                             this.$message.error('账号或者密码错误，请重新输入！');
                             return false;
