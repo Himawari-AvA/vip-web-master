@@ -1,3 +1,13 @@
+/*
+ * @Author: Himawari 867415074@qq.com
+ * @Date: 2022-06-24 19:57:11
+ * @LastEditors: Himawari 867415074@qq.com
+ * @LastEditTime: 2022-06-25 16:07:27
+ * @FilePath: \vip-web-master\src\utils\request.js
+ * @Description:
+ *
+ * Copyright (c) 2022 by Himawari 867415074@qq.com, All Rights Reserved.
+ */
 import axios from 'axios';
 /*
 这里是抽象出来的总请求文件，所有组件的ajax请求通过api下的index.js的函数调用，最终
@@ -42,7 +52,7 @@ const service = axios.create({
     //开发环境中前后端分离有跨域问题，需要使用到baseURL来跳转到js代理服务器，生产环境中不使用单独的WEB服务器的情况下，注释掉这一行
     //baseURL:'/api',
     //当部署到服务器，或者内网穿透，不是本机访问时，需要将baseURL改为外网域名地址。当本地访问时，需要该为localhost:8080
-    baseURL:'http://localhost:8081/cinema',
+    baseURL: 'http://localhost:8081/vip',
     timeout: 5000
 });
 

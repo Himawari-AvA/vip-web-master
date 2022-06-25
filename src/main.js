@@ -2,8 +2,8 @@
  * @Author: Himawari 867415074@qq.com
  * @Date: 2022-06-24 19:57:11
  * @LastEditors: Himawari 867415074@qq.com
- * @LastEditTime: 2022-06-25 01:06:31
- * @FilePath: \cinema-web-master\src\main.js
+ * @LastEditTime: 2022-06-26 01:02:10
+ * @FilePath: \vip-web-master\src\main.js
  * @Description:
  *
  * Copyright (c) 2022 by Himawari 867415074@qq.com, All Rights Reserved.
@@ -15,9 +15,9 @@ import App from './App.vue';
 import router from './router';
 import ElementUI from 'element-ui';
 //导入国际化组件
-import VueI18n from 'vue-i18n';
+// import VueI18n from 'vue-i18n';
 //这是典型的导入文件的非默认函数
-import { messages } from './components/common/i18n';
+// import { messages } from './components/common/i18n';
 import 'element-ui/lib/theme-chalk/index.css'; // 默认主题
 // import './assets/css/theme-green/index.css'; // 浅绿色主题
 import './assets/css/icon.css';
@@ -31,15 +31,15 @@ Vue.prototype.$moment = moment;
 //阻止启动生产消息，常用作指令。false表示生产模式，true表示开发模式，会显示额外的提示
 Vue.config.productionTip = false;
 /// 通过插件的形式挂载，通过全局方法 Vue.use() 使用插件
-Vue.use(VueI18n);
+// Vue.use(VueI18n);
 Vue.use(ElementUI, {
     size: 'small'
 });
 //语言标识 //this.$i18n.locale // 通过切换locale的值来实现语言切换
-const i18n = new VueI18n({
-    locale: 'zh',
-    messages
-});
+// const i18n = new VueI18n({
+//     locale: 'zh',
+//     messages
+// });
 
 /*
  * 在前端路由跳转中，路由跳转前都是会经过beforeEach，
@@ -90,7 +90,7 @@ router.beforeEach((to, from, next) => {
 // 从而让整个应用都有路由功能
 new Vue({
     router, //省略了components:
-    i18n,
+    // i18n,
     //render函数是渲染一个视图，然后提供给el挂载，如果没有render那页面什么都不会出来
     render: h => h(App)
     /*1.这是 es 6 的语法，表示 Vue 实例选项对象的 render 方法作为一个函数，接受传入的参数 h 函数，返回 h(App) 的函数调用结果。

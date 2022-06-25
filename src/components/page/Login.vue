@@ -22,7 +22,6 @@
                 <div class="login-btn2">
                     <el-button type="primary" @click="submitForm()">忘记密码</el-button>
                 </div>
-                <p class="login-tips">Tips : 默认账号为admin，密码为123123。</p>
             </el-form>
         </div>
     </div>
